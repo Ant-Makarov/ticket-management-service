@@ -10,7 +10,7 @@ create table if not exists task.bus_route (
 );
 
 create table if not exists task.ticket (
-	id uuid primary key default gen_random_uuid(),
+	ticket_id uuid primary key default gen_random_uuid(),
 	owner_name varchar(150) not null,
 	route_id bigint references task.bus_route(id) on delete cascade,
 	payment_id uuid not null,
