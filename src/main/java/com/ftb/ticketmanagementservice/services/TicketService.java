@@ -1,13 +1,15 @@
 package com.ftb.ticketmanagementservice.services;
 
 import com.ftb.ticketmanagementservice.dto.TicketDTO;
+import com.ftb.ticketmanagementservice.dto.TicketResponseDTO;
 import com.ftb.ticketmanagementservice.models.Ticket;
 
+import java.util.Map;
 import java.util.UUID;
 
 public interface TicketService {
 
-    UUID createTicket(TicketDTO dto);
+    Map<String, UUID> createTicket(TicketDTO dto);
 
-    Ticket getTicketInfoById(String id);
+    TicketResponseDTO getTicketInfoById(String id);
 }

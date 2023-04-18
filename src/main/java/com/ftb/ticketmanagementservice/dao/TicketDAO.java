@@ -1,5 +1,6 @@
 package com.ftb.ticketmanagementservice.dao;
 
+import com.ftb.ticketmanagementservice.dto.TicketResponseDTO;
 import com.ftb.ticketmanagementservice.exceptions.TicketNotFoundException;
 import com.ftb.ticketmanagementservice.models.Ticket;
 import com.ftb.ticketmanagementservice.util.Code;
@@ -21,6 +22,7 @@ public class TicketDAO {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final RowMapper<Ticket> mapper;
+    private final RowMapper<TicketResponseDTO> dtoRowMapper;
 
     public UUID save(Ticket ticket) {
         String sql = " insert into task.ticket(owner_name, route_id, payment_id, "
@@ -43,14 +45,14 @@ public class TicketDAO {
         return (UUID) keys.get("ticket_id");
 
     }
-    public Ticket findById(String id) {
+    public TicketResponseDTO findById(String id) {
         UUID uuid = UUID.fromString(id);
         String sql = " select t.ticket_id, t.payment_status, br.from_departure,        "
                    + " br.to_departure, br.departure_time, br.route_cost               "
                    + " from task.ticket t join task.bus_route br on t.route_id = br.id "
                    + " where t.ticket_id = :id                                         ";
 
-        List<Ticket> tickets = jdbcTemplate.query(sql, Map.of("id", uuid), mapper);
+        List<TicketResponseDTO> tickets = jdbcTemplate.query(sql, Map.of("id", uuid), dtoRowMapper);
         if (tickets.isEmpty()) {
             throw new TicketNotFoundException(Code.REQUEST_VALIDATION_ERROR,
                     String.format("Ticket with id %s not found", uuid),
