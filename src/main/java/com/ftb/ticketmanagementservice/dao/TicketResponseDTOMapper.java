@@ -19,11 +19,11 @@ public class TicketResponseDTOMapper implements RowMapper<TicketResponseDTO> {
                 .ticketId(rs.getObject("ticket_id", UUID.class))
                 .paymentStatus(PaymentStatus.valueOf(rs.getString("payment_status")))
                 .busRouteInfo(BusRoute.builder()
-                                      .fromDeparture(rs.getString("from_departure"))
-                                      .toDeparture(rs.getString("to_departure"))
-                                      .departureTime(rs.getTimestamp("departure_time").toLocalDateTime())
-                                      .cost(rs.getBigDecimal("route_cost"))
-                                      .build())
+                        .fromDeparture(rs.getString("from_departure"))
+                        .toDeparture(rs.getString("to_departure"))
+                        .departureTime(rs.getTimestamp("departure_time").toLocalDateTime())
+                        .cost(rs.getBigDecimal("route_cost"))
+                        .build())
                 .build();
     }
 }

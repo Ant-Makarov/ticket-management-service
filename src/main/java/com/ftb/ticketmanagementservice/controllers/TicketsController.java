@@ -36,7 +36,7 @@ public class TicketsController {
     }
 
     @GetMapping("/{id}/info")
-    public ResponseEntity<TicketResponseDTO> getTicketInfo(String id) {
+    public ResponseEntity<TicketResponseDTO> getTicketInfo(@PathVariable("id") String id) {
         return new ResponseEntity<>(ticketService.getTicketInfoById(id), HttpStatus.OK);
     }
 }

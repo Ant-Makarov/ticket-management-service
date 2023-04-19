@@ -12,7 +12,8 @@ import java.util.UUID;
 public class TicketMapper implements RowMapper<Ticket> {
     @Override
     public Ticket mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return Ticket.builder().id(rs.getObject("ticket_id", UUID.class))
+        return Ticket.builder()
+                .id(rs.getObject("ticket_id", UUID.class))
                 .routeId(rs.getLong("route_id"))
                 .paymentId(rs.getObject("payment_id", UUID.class))
                 .build();

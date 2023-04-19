@@ -22,7 +22,7 @@ public class BusRouteDAO {
     private final RowMapper<BusRoute> mapper;
 
     public BusRoute findById(Long id) {
-        String sql = " select id, route_cost, seats_avaialble from task.bus_route where id = :id";
+        String sql = " select id, route_cost, seats_available from task.bus_route where id = :id";
 
         List<BusRoute> routes = jdbcTemplate.query(sql, Map.of("id", id), mapper);
         if (routes.isEmpty()) {

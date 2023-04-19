@@ -12,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
@@ -31,8 +34,14 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentResponseDTO updatePaymentStatus(String id) {
-        return null;
+    public PaymentResponseDTO updatePaymentStatus(UUID id) {
+        ResponseEntity<PaymentResponseDTO> exchange = restTemplate.exchange("/payments/{id}/status",
+                HttpMethod.GET,
+                null,
+                PaymentResponseDTO.class,
+                Map.of("id", id.toString()));
+
+        return exchange.getBody();
     }
 
     private PaymentDTO convertToDto(Ticket ticket, BusRoute busRoute) {

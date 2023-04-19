@@ -35,9 +35,9 @@ public class RestTemplateConfig {
         UriTemplateHandler uriTemplateHandler = new DefaultUriBuilderFactory(paymentServiceUri);
 
         return builder.uriTemplateHandler(uriTemplateHandler)
-                      .errorHandler(errorHandler)
-                      .additionalInterceptors(requestInterceptor)
-                      .build();
+                .errorHandler(errorHandler)
+                .additionalInterceptors(requestInterceptor)
+                .build();
     }
 
 }
